@@ -68,6 +68,7 @@ public class UserConnection {
 				synchronized(this.ConnectedUser) {
 					if(this.AmountOfReference.get()<=0) {
 						this.ConnectedUser.remove(this.userUUID, this);
+						System.out.println("I am removing reference");
 					}
 				}
 			}

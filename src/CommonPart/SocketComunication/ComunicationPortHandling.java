@@ -41,7 +41,7 @@ public final class ComunicationPortHandling {
 	//this character is for notification, when a server finish autorization proces
 	//client send this notification, then reader will be interupt and connection would be change
 	//
-	private static final int SoTimeoutOFSocket = 180 * 1000;
+	private static final int SoTimeoutOFSocket = 600 * 1000;
 
 
 
