@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import CommonPart.SQL.MainSQL;
@@ -38,6 +39,7 @@ public class ThreadManagementServer extends ThreadPoolingManagement {
 
 	private static LinkedBlockingQueue<Runnable> QueueOfUnprocessMessages=new LinkedBlockingQueue<Runnable>();
 	private static LinkedBlockingQueue<ProcessSQLTaskObject> UnFinishSQLTask=new LinkedBlockingQueue<ProcessSQLTaskObject>();
+	private ScheduledExecutorService ScheduledAndWaitService=Executors.newSingleThreadScheduledExecutor();
 
 	private void AddUnfinishSQLTask(ProcessSQLTaskObject task) {
 		
@@ -61,7 +63,8 @@ public class ThreadManagementServer extends ThreadPoolingManagement {
 	@Override
 	public void schedule(Runnable command, long delay, TimeUnit timeUnit) {
 		// TODO Auto-generated method stub
-		
+		ScheduledAndWaitService.schedule(command, delay, timeUnit);
+
 	}
 
 	@Override

@@ -20,7 +20,7 @@ import Main.Main;
 
 public final class ComunicationPortHandling {
 	
-	private static final String VerifyConnection="\\|&qsr\\";
+	private static final String VerifyConnectionn="|&qsr";
     private static Random random = new Random();
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
@@ -45,7 +45,14 @@ public final class ComunicationPortHandling {
 	//
 	private static final int SoTimeoutOFSocket = 600 * 1000;
 
-
+	/** Metod return VerifyConnection patern
+	 * @param escape true- if you want to return with espace character, in order to splitMetod */
+	private static String getVerifyConectionPatern(boolean espace) {
+		if(espace) {
+			return "\\"+ComunicationPortHandling.VerifyConnectionn;
+		}
+		return ComunicationPortHandling.VerifyConnectionn;
+	}
 
 	
 
@@ -256,11 +263,16 @@ public final class ComunicationPortHandling {
 					continue;
 				}
 
-				 String mes = sb.toString().substring(0,sb.length()-ComunicationPortHandling.EndMessageCharacter.length());
 				
+				 String mes = sb.toString().substring(0,sb.length()-ComunicationPortHandling.EndMessageCharacter.length()).trim().replaceAll(ComunicationPortHandling.getVerifyConectionPatern(true), "");
+				 sb.setLength(0);
+				 if(mes.length()==0) {
+					System.out.println("Notification");
+					continue;
+				}
+				final String curentMessage=mes;
+				mes=null;
 				
-				final String curentMessage=mes.replaceAll(ComunicationPortHandling.VerifyConnection, "");
-				sb.setLength(0);
 				if(!this.connectionAutorized) {
 					if (!curentMessage.equals(AutorizationKey)) {
 						this.SecurityTry++;
@@ -319,7 +331,7 @@ public final class ComunicationPortHandling {
 					return;
 				}
 				System.out.println("I am sending verification");
-				writeMessage(ComunicationPortHandling.VerifyConnection,true);
+				writeMessage(ComunicationPortHandling.getVerifyConectionPatern(false),true);
 				this.SendVerifyMess();
 			}, 30, TimeUnit.SECONDS);
 
