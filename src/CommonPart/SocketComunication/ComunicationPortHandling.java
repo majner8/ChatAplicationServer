@@ -92,9 +92,7 @@ public final class ComunicationPortHandling {
 		this.WriteHandler.WriteIntoFile(start);
 	}
 	
-	private void CloseTemporary() {
-		System.out.println("I am closing");
-		System.out.println(LocalDateTime.now());
+	private void CloseTemporary(Exception ee) {
 		
 		this.TemporaryClosed=true;
 		try {
@@ -104,7 +102,7 @@ public final class ComunicationPortHandling {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		}
-		this.comunication.ConnectionIsEnd();
+		this.comunication.ConnectionIsEnd(ee);
 	}
 	
 	private void ProblemWithConnection(Exception e) {
@@ -119,7 +117,7 @@ public final class ComunicationPortHandling {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		this.CloseTemporary();
+		this.CloseTemporary(e);
 	}
 
 	/** metod change appropriate comunication interface
@@ -201,8 +199,7 @@ public final class ComunicationPortHandling {
 							continue;
 					    }
 					    if(this.LengSecurityTry>this.MaximumSecuryTry) {
-					    	System.out.println("closeA");
-							CloseTemporary();
+							CloseTemporary(new SecurityException());
 							return;
 					    }
 					    
@@ -217,37 +214,12 @@ public final class ComunicationPortHandling {
 					    }
 					}
 					if(c==-1) {
-				    	System.out.println("closeB");
-
-				    	System.out.println(socket.isClosed());
-				    	System.out.println(socket.isInputShutdown());
-				    	System.out.println(socket.isConnected());
-				    	System.out.println(socket.isOutputShutdown());
 
 
-						CloseTemporary();
+						CloseTemporary(new CommonPart.SocketComunication.ComunicationPortHandling.ComunicationException.ConnectionUnstabilish());
 						return;
 					}
 					this.LengSecurityTry=1;
-					
-				//	readMessage[0]=read.readLine();
-					
-					/*
-					if(readMessage[0]==null) {
-						this.SecurityTry++;
-						if(this.SecurityTry>=this.MaximumSecuryTry*3) {
-							CloseTemporary();
-						}
-						continue;
-					}
-					if(readMessage[0].equals("null")) {
-						this.SecurityTry++;
-						if(this.SecurityTry>=this.MaximumSecuryTry*3) {
-							CloseTemporary();
-						}
-						continue;
-					}
-					*/
 				}
 				catch(SocketTimeoutException e) {
 					SocketTimeOutTryAmount++;
@@ -267,7 +239,6 @@ public final class ComunicationPortHandling {
 				 String mes = sb.toString().substring(0,sb.length()-ComunicationPortHandling.EndMessageCharacter.length()).trim().replaceAll(ComunicationPortHandling.getVerifyConectionPatern(true), "");
 				 sb.setLength(0);
 				 if(mes.length()==0) {
-					System.out.println("Notification");
 					continue;
 				}
 				final String curentMessage=mes;
@@ -277,9 +248,7 @@ public final class ComunicationPortHandling {
 					if (!curentMessage.equals(AutorizationKey)) {
 						this.SecurityTry++;
 						if(this.SecurityTry>=this.MaximumSecuryTry) {
-					    	System.out.println("closeC");
-
-							CloseTemporary();
+							CloseTemporary(new SecurityException());
 						}
 						continue;
 					}
@@ -330,7 +299,6 @@ public final class ComunicationPortHandling {
 					
 					return;
 				}
-				System.out.println("I am sending verification");
 				writeMessage(ComunicationPortHandling.getVerifyConectionPatern(false),true);
 				this.SendVerifyMess();
 			}, 30, TimeUnit.SECONDS);
@@ -426,9 +394,6 @@ public final class ComunicationPortHandling {
 
 		public synchronized void WriteMessageIntoFile(String message) {
 			if(!this.FileWritingAllow) {
-		    	System.out.println("closeDD");
-
-				CloseTemporary();
 				return;
 			}
 			try {
@@ -531,18 +496,13 @@ public final class ComunicationPortHandling {
 
 	
 	
-	
-	
-	
-	
-
 
 
 	
 	///////
 	
 	public static interface ComunicationPortHandlingInterface{
-		public  void ConnectionIsEnd();
+		public  void ConnectionIsEnd(Exception e);
 
 		public  void ProcessMessage(SocketComunication message);
 	
@@ -572,8 +532,22 @@ public final class ComunicationPortHandling {
 		UUIDDevice = uUIDDevice;
 	}
 
-	public static class ConnectionIsTemporaryClosed extends Exception{
+	public abstract static class ComunicationException extends Exception {
 		
+		protected ComunicationException() {
+			
+		}
+		
+		protected ComunicationException(String mes) {
+			super(mes);
+		}
+		private static class SecurityException extends ComunicationException {
+			public SecurityException(String mes) {
+				super(mes);
+			}
+		}
+		private static class ConnectionUnstabilish extends ComunicationException{
+			
+		} 
 	}
-	
 }

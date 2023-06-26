@@ -15,20 +15,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class SocketComunication {
 	
 	private final static String RegexEscapePatern="(?<!\\\\)\\";
-	// SocketMessage look like as follow
-	//UUID recipient separator
-	//UUID task separator separator
-	//FirstSocketMessage separator 
-	//mainSQL Enum separator
-	//first SimpleResultSet separator
-	//second ResultSet separator- pokud second separator neni, musi byt hodnota null
-	//enum ....
 	
 	private String UUIDTask;
 	private String UUIDRecipient;
 
 	
-	//have to be init
 	private TypeOfUUIDRecipient typeOfUUID;
 	private String UUIDSender;
 
@@ -51,13 +42,6 @@ public class SocketComunication {
 	}
 
 	
-	// SocketMessage look like as follow
-	//UUID recipient separator
-	//UUID task separator separator
-	//mainSQL Enum separator
-	//first SimpleResultSet separator
-	//second ResultSet separator- pokud second separator neni, musi byt hodnota null
-	//enum ....
 	public SocketComunication(String Message,InetAddress adressOfSender) throws SocketComunicationException {try {
 		String [] field=Message.split(getRegexPatern(SocketComunication.Separator));
 			
@@ -93,13 +77,7 @@ public class SocketComunication {
 	}
 	
 	public static class OneSocketMessage{
-		// SocketMessage look like as follow
-		//UUID recipient separator
-		//UUID task separator separator
-		//mainSQL Enum separator
-		//first SimpleResultSet separator
-		//second ResultSet separator- pokud second separator neni, musi byt hodnota null
-		//enum ....
+		
 		private static final int NumberOfFieldGroup=3;//represent how many part have each
 		// OneSocketMessage
 		private SocketComunicationEnum MainEnum;

@@ -24,6 +24,7 @@ public class ConnectionAutorize implements ComunicationPortHandling.Comunication
 	private final long MaxTimeout;
 	private ComunicationPortHandling comunication;
 	
+	
 	public ConnectionAutorize(BufferedReader read, BufferedWriter write, Socket socket) {
 		this.comunication=new ComunicationPortHandling(false,this,read,write,socket);
 		// TODO Auto-generated constructor stub
@@ -35,11 +36,7 @@ public class ConnectionAutorize implements ComunicationPortHandling.Comunication
 
 	
 		
-	@Override
-	public void ConnectionIsEnd() {
-		// TODO Auto-generated method stub
 	
-	}
 
 
 	private boolean LogginRegisterSuccesful=false;//value represent state when
@@ -389,6 +386,15 @@ public class ConnectionAutorize implements ComunicationPortHandling.Comunication
 	
 	private static interface MakeTaskAfter{
 		public void run(String DeviceUUID);
+	}
+
+
+
+
+	@Override
+	public void ConnectionIsEnd(Exception e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

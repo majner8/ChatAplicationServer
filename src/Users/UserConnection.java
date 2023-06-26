@@ -363,12 +363,6 @@ public class UserConnection {
 
 	
 			
-			@Override
-			public void ConnectionIsEnd() {
-				// TODO Auto-generated method stub
-				SetOfConnectedDevice.remove(this);
-				referenceRemoved();
-			}
 
 			@Override
 			public void ProcessMessage(SocketComunication message) {
@@ -769,6 +763,16 @@ public class UserConnection {
 					mess.addOneSocketMessage(one);
 					comu.writeMessage(mess.toString(), true);
 				}
+			}
+
+
+
+			@Override
+			public void ConnectionIsEnd(Exception e) {
+				// TODO Auto-generated method stub
+				SetOfConnectedDevice.remove(this);
+				referenceRemoved();
+			
 			}
 			
  		}
