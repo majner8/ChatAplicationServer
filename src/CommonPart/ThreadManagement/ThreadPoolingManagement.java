@@ -20,13 +20,6 @@ public abstract class ThreadPoolingManagement {
 	}
 	
 	
-	
-	
-//	private static ScheduledExecutorService ScheduledAndWaitService=Executors.newSingleThreadScheduledExecutor();
-	
-	
-	//private static ExecutorService Service;
-
 	public static void ShutDown() {thread.ShutDownService();}
 	
 	public abstract void ProcessReceivedMessage(Runnable command);

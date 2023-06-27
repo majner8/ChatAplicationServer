@@ -30,6 +30,7 @@ public class Main {
 		Main.StopServer = true;
 		System.exit(0);
 	}
+	
 
 	static {
 		try {
@@ -37,7 +38,6 @@ public class Main {
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			// throw hlavni chyba a shodit server
 		}
 	}
 

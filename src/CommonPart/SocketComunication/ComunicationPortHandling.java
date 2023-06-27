@@ -20,6 +20,8 @@ import Main.Main;
 
 public final class ComunicationPortHandling {
 	
+	public static final String DeviceUUIDCharacter="&sd";
+	
 	private static final String VerifyConnectionn="|&qsr";
     private static Random random = new Random();
     private static final String ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
@@ -38,11 +40,7 @@ public final class ComunicationPortHandling {
 	private ComunicationPortHandlingInterface comunication;
 	public static final String AutorizationKey = "dasrrweijewieqwožš4č";
 	
-	public static final String DeviceUUIDCharacter="&sd";
 
-	//this character is for notification, when a server finish autorization proces
-	//client send this notification, then reader will be interupt and connection would be change
-	//
 	private static final int SoTimeoutOFSocket = 600 * 1000;
 
 	/** Metod return VerifyConnection patern
@@ -160,7 +158,7 @@ public final class ComunicationPortHandling {
 	}
 	
 	public void AllowFileWrite() {
-		this.WriteHandler.SetFileWriting(UserUUID, DeviceUUIDCharacter);
+		this.WriteHandler.SetFileWriting();
 	}
 
 	private final class ReadSocket extends Thread {
@@ -204,7 +202,7 @@ public final class ComunicationPortHandling {
 					    }
 					    
 					    
-					    //chech if end by endMessageCharacter
+					    //verify if end by endMessageCharacter
 					    if(sb.length()>=ComunicationPortHandling.EndMessageCharacter.length()) {
 						    String lastMessage=sb.substring(sb.length()-ComunicationPortHandling.EndMessageCharacter.length());
 						    if(lastMessage.equals(ComunicationPortHandling.EndMessageCharacter)) {
@@ -326,7 +324,7 @@ public final class ComunicationPortHandling {
 		}
 		
 		/** metod allow fileWriting*/
-		public synchronized void SetFileWriting(String UserUUID,String deviceUUID) {
+		public synchronized void SetFileWriting() {
 			if(this.FileWritingAllow) {
 				throw new RuntimeException("FileWriting was already allow");
 			}
@@ -447,7 +445,7 @@ public final class ComunicationPortHandling {
 		@Override
 		public void run() {
 			while (!Main.isServerStopped() && !TemporaryClosed) {
-				// chech if reSending is not avaiable
+				// verify if reSending is not avaiable
 				if (this.ReSending&&this.FileWritingAllow) {
 					this.ReadMessageFromFileAndSend();
 					try {

@@ -14,6 +14,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class SocketComunication {
 	
+	
+	
 	private final static String RegexEscapePatern="(?<!\\\\)\\";
 	
 	private String UUIDTask;
@@ -110,7 +112,6 @@ public class SocketComunication {
 				this.MainEnum=SocketComunicationEnum.valueOf(DevideMessage[BeginIndex].trim());
 				BeginIndex++;
 				
-					//firstSimpleResultSet/OneValue
 					
 					
 					if(!DevideMessage[BeginIndex].contains(SocketComunication.NoSimpleResultSetSeparator)){
@@ -494,13 +495,7 @@ public static class SimpleResultSet{
 	
 	
 
-	// SocketMessage look like as follow
-	//UUID recipient separator
-	//UUID task separator separator
-	//mainSQL Enum separator
-	//first SimpleResultSet separator
-	//second ResultSet separator- pokud second separator neni, musi byt hodnota null
-	//enum ....
+	
 	@Override
 	public String toString() {
 		StringBuilder bd=new StringBuilder();

@@ -37,10 +37,7 @@ public static LoadSQLFile LoadSQLFile;
 			return;
 		}
 		this.LoadSQLFile=new LoadSQLFile();
-		//make loadFileProcess
-		//this.LoadSQLFile(new Enum[] {SQLServer.databaseTaskType.TemporaryTable		});
 		this.LoadSQLFile.LoadSQLFile(ListOfQuery, ListOfPaternSQLTask);	
-		//this.LoadSQLFile(new Enum[]{SQLServer.databaseTaskType.Synchronization});
 		this.mainSQL=this;		
 		this.LoadSQLFile=null;
 	}
@@ -65,8 +62,6 @@ public static LoadSQLFile LoadSQLFile;
 					text.append(line).append("\n");
 				}
 			} catch (IOException e) {
-				// Rather than just printing the stack trace, it's better to pass the exception to the FuctionException so
-				// that you can get the details of what went wrong when the FuctionException is caught.
 				e.printStackTrace();
 				throw new FileLoadException();
 			}
@@ -184,7 +179,6 @@ return "U" + sb.toString();
 		ArrayList<Integer>NameOfValue=new ArrayList<Integer>();
 		{
 			String [] field=rawTask.split("values");
-			//first parametr, second is rest
 			//get index of Each value, appropriate to simpleResultSet
 			List<String>columnName=rs.getColumnName(false);
 			
@@ -240,7 +234,6 @@ return "U" + sb.toString();
 	
 	private static String SelectNoResultSetQuery(String rawTask,SimpleResultSet rs) {
 		//separate part multipleValue part, it is part where we do not known how many row will be have
-		//each part have to be query by Charater
 		String[] field=rawTask.split(DatabaseCharacter.MultipleValue.toString());
 		
 		if(field.length!=3&&field.length!=1) {
@@ -270,7 +263,6 @@ return "U" + sb.toString();
 	
 		for(int i=0;i<field.length-1;i++)
 		{
-			//separate Comparison Operator
 			String oneValue=field[i];
 			oneValue=oneValue.trim();
 			if(oneValue.endsWith("=")||oneValue.endsWith("<")||oneValue.endsWith(">")) {
@@ -323,7 +315,6 @@ return "U" + sb.toString();
 		return MultipleValuePatern.toString();
 	}
 	
-	//class save query code and also instead if a insert or other type
 	public static class Query{
 		public TypeOFQuery TypeQuery;
 		public String SQLQuery;

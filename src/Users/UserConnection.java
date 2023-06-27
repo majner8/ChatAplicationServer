@@ -351,10 +351,7 @@ public class UserConnection {
 				
 				private void EndSynchronization( ) {
 				
-					//make task, such as sending shown of message of each user
-					//will be done in future
-					//after is process finish
-					//send quick notification user
+				
 					
 					initSynchronization(false);
 				}
