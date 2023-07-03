@@ -1,54 +1,43 @@
-# ChatAPP: Jednoduchá chatovací aplikace v Javě
+ChatAPP: A simple chat aplication developed in Java
+The following technologies and libraries are used in this project:
+	● Java
+	● MySQL 8
+	● SQLite
+	● Apache Commons Text
 
-## Technologie a knihovny
+Current status of the project
+	● ChatAPP is still under development. Some parts of the project have not been fully tested and may exhibit limited functionality.
+	● The current main goal is to enable users to easily launch the application using an .exe or .jar file without the need for complicated installation.
+	● Aplication support onnline and offline chat between each users.
+	● The implementation of group chat is planned in the future.
+
+Structure of project
+	● Project is proceeding in two main development respository
+		○ ChatApplicationServer: This respository is focus on server part of aplication
+		○ ChatApplicationClient: This respository is focus on client part of aplication
+	● The entire project is being developed by a single developer.
+	● Common components for each repository can be found in the CommonPart folder.
+For more details on the structure and components of the project, please see the STRUCTURE_AND_COMPONENTS file
+
+-------------------------------------------------------------------------------------------------------------------------------
+ChatAPP: Jednoduchá chatovací aplikace, vyvíjená v Jave
 
 V tomto projektu jsou využívány následující technologie a knihovny:
+	● Java
+	● MySQL 8
+	● SQLite
+	● Apache Commons Text
 
-- Java
-- MySQL 8
-- SQLite
-- Apache Commons Text
+Aktuální stav projektu
+	● ChatAPP se stále vyvíjí. Některé části projektu ještě nebyly plně otestované a mohou vykazovat omezenou funkcionalitu. 
+	● Aktuálně je hlavním cílem umožnit uživatelům jednoduché spuštění aplikace pomocí .exe nebo .jar souboru bez potřeby složité instalace.
+	● Aplikace podporuje online i offline chat mezi jednotlivými uživateli. V budoucnu je plánována implementace skupinového chatu.
 
-## Aktuální stav projektu
+Struktura projektu
+	●  Práce na projektu probíhá ve dvou hlavních vývojářských větvích:
+		○ ChatApplicationServer: Tato větev se zaměřuje na serverovou část aplikace.
+		○ ChatApplicationClient: Tato větev je zaměřena na klientskou část aplikace.
+	●  Celý projekt je vyvíjen jedním vývojářem.
 
-ChatAPP se stále vyvíjí. Některé části projektu ještě nebyly plně otestované a mohou vykazovat omezenou funkcionalitu. 
-Aktuálně je hlavním cílem umožnit uživatelům jednoduché spuštění aplikace pomocí .exe nebo .jar souboru bez potřeby složité instalace.
+Pro více detailů o struktuře a komponentech projektu se prosím podívejte na soubor STRUCTURE_AND_COMPONENTS
 
-Aplikace podporuje online i offline chat mezi jednotlivými uživateli. V budoucnu je plánována implementace skupinového chatu.
-
-## Struktura projektu
-
-Práce na projektu probíhá ve dvou hlavních vývojářských větvích:
-
-- **ChatApplicationServer**: Tato větev se zaměřuje na serverovou část aplikace.
-- **ChatApplicationClient**: Tato větev je zaměřena na klientskou část aplikace.
-
-Celý projekt je vyvíjen jedním vývojářem.
-
-## Klíčové komponenty
-
-### `CommonPart/SQL/MainSQL`
-Tato třída zajistí načítání a zpracování dotazů (queries), uložených ve složce SQL. 
-Každý dotaz obsahuje speciální znaky. Seznam všech speciálních znaků najdete v:
-- `CommonPart/SQL/MainSQL/DatabaseCharacter`
-- `CommonPart/SQL/MainSQL/TypeOfDatabase`
-- `CommonPart/SQL/MainSQL/Query/TypeOFQuery`
-	
-	
-### `CommonPart/SocketComunication/CommunicationPortHandling/`
-Tato třída zajišťuje komunikaci mezi klientem a serverem pomocí třídy `java.net.Socket`.
-
-#### `ReadSocket`
-Zajišťuje čtení z socketu.
-
-#### `WriteMessage`
-Zajišťuje odesílání zpráv. 
-V budoucnu je plánována implementace zapisování odchozích zpráv do txt souboru, při výpadku spojení.
-Po obnovení dojde k jejich opětovnému odeslání.
-
-### `CommonPart/SocketCommunication/SocketCommunication`
-Tato třída zajišťuje uchování jednotlivých zpráv v průběhu zpracování. V současnosti jsou zprávy zasílány nezašifrované.
-Zprávy jsou odesílány v tabulkovém formátu, konverzi zajišťuje třída `SimpleResultSet` ve struktuře `SocketCommunication`.
-
-## Společné komponenty pro obě větve
-Společné komponenty pro obě větve najdete ve složce `CommonPart`.

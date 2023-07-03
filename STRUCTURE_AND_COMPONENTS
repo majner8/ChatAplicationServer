@@ -1,0 +1,48 @@
+
+Key components
+
+CommonPart/SQL/MainSQL
+	● This class ensures the loading and processing of queries, stored in the SQL folder.
+	● Each query contains special characters. A list of all special characters can be found in:
+		○ CommonPart/SQL/MainSQL/DatabaseCharacter
+		○ CommonPart/SQL/MainSQL/TypeOfDatabase
+		○ CommonPart/SQL/MainSQL/Query/TypeOFQuery
+
+CommonPart/SocketComunication/CommunicationPortHandling
+	● This class ensures comunication between client and server by used class java.net.Socket.
+	● Inner class ReadSocket
+		○ This class ensures reading from Socket.
+	● WriteMessage
+		○ This class provides sending messages.
+		○ This ensures the sending of messages. In the future,
+		○ the implementation of writing outgoing messages to a txt file is planned in case of a connection failure.
+		Upon restoration, they will be resent.
+
+CommonPart/SocketCommunication/SocketCommunication
+	● This class ensures the preservation of individual messages during processing.
+	● Currently, messages are sent unencrypted.
+	● Messages are sent in table format, convertation provides inner class SimpleResultSet
+
+----------------------------------------------------------------------------
+Klíčové komponenty
+
+CommonPart/SQL/MainSQL
+	●  Tato třída zajistí načítání a zpracování dotazů (queries), uložených ve složce SQL. 
+	●  Každý dotaz obsahuje speciální znaky. Seznam všech speciálních znaků naleznete:
+		○ CommonPart/SQL/MainSQL/DatabaseCharacter
+		○ CommonPart/SQL/MainSQL/TypeOfDatabase
+		○ CommonPart/SQL/MainSQL/Query/TypeOFQuery
+		
+CommonPart/SocketComunication/CommunicationPortHandling/
+	● Tato třída zajišťuje komunikaci mezi klientem a serverem pomocí třídy `java.net.Socket`.
+	●  ReadSocket
+		○ Tato třída zajišťuje čtení ze socketu.
+	● WriteMessage
+		○ Tato třída zajišťuje odesílání zpráv. 
+		○ V budoucnu je plánována implementace zapisování odchozích zpráv do txt souboru, při výpadku spojení.
+		Po obnovení dojde k jejich opětovnému odeslání.
+
+CommonPart/SocketCommunication/SocketCommunication
+● Tato třída zajišťuje uchování jednotlivých zpráv v průběhu zpracování. V současnosti jsou zprávy zasílány nezašifrované.
+● Zprávy jsou odesílány v tabulkovém formátu, konverzi zajišťuje třída `SimpleResultSet` ve struktuře `SocketCommunication`.
+
